@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkclinicared_docs=self.webpackChunkclinicared_docs||[]).push([["3220"],{1912(c){c.exports=JSON.parse('{"blogBasePath":"/clinicared-docs/blog","blogTitle":"Blog","authorsListPath":"/clinicared-docs/blog/authors"}')}}]);
