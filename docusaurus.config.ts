@@ -104,7 +104,7 @@ const config: Config = {
           items: [
             {
               label: 'Documentación',
-              to: '/docs/adr-01-arquitectura',
+              to: '/docs/architecture/architecture_v1',
             },
           ],
         },
