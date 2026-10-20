@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkclinicared_docs=self.webpackChunkclinicared_docs||[]).push([["8304"],{6883(c,e,s){s.d(e,{createInfoServices:()=>a.v});var a=s(6744);s(184)}}]);

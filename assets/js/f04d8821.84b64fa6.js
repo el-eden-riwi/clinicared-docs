@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkclinicared_docs=self.webpackChunkclinicared_docs||[]).push([["311"],{672(e){e.exports=JSON.parse('{"metadata":{"permalink":"/clinicared-docs/blog","page":1,"postsPerPage":10,"totalPages":1,"totalCount":4,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);
