@@ -8,6 +8,11 @@ const config: Config = {
   title: 'ClínicaRed Docs',
   tagline: 'Documentación Técnica y Arquitectura de ClínicaRed',
   favicon: 'img/favicon.ico',
+  // Activar Mermaid para los diagramas
+  markdown: {
+    mermaid: true,
+  },
+  themes: ['@docusaurus/theme-mermaid'],
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
