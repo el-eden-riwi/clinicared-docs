@@ -51,20 +51,7 @@ const config: Config = {
           // Remove this to remove the "edit this page" links.
           editUrl: "https://github.com/el-eden-riwi/clinicared-docs/tree/main/",
         },
-        blog: {
-          showReadingTime: true,
-          feedOptions: {
-            type: ["rss", "atom"],
-            xslt: true,
-          },
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl: "https://github.com/el-eden-riwi/clinicared-docs/tree/main/",
-          // Useful options to enforce blogging best practices
-          onInlineTags: "warn",
-          onInlineAuthors: "warn",
-          onUntruncatedBlogPosts: "warn",
-        },
+        blog: false,
         theme: {
           customCss: "./src/css/custom.css",
         },
@@ -91,7 +78,11 @@ const config: Config = {
           position: "left",
           label: "Documentación",
         },
-        { to: "/blog", label: "Blog", position: "left" },
+        {
+          to: "/docs/problema-original",
+          label: "El Problema",
+          position: "left",
+        },
         {
           href: "https://github.com/el-eden-riwi",
           label: "GitHub",
