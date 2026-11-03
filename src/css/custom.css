@@ -1,0 +1,337 @@
+/**
+ * ClínicaRed Docs — visual layer
+ * Themes: Light · Dark · Default (follows the OS via colorMode.respectPrefersColorScheme)
+ * "Default" resolves to Light or Dark at runtime, so it inherits the rules below.
+ */
+
+/* ==========================================================================
+   1. DESIGN TOKENS
+   ========================================================================== */
+
+/* ---------- LIGHT: clinical blue / mint / emerald ---------- */
+:root {
+  /* Brand: electric blue */
+  --ifm-color-primary: #2563eb;
+  --ifm-color-primary-dark: #1f5ae0;
+  --ifm-color-primary-darker: #1d56d6;
+  --ifm-color-primary-darkest: #1745b0;
+  --ifm-color-primary-light: #3b74ee;
+  --ifm-color-primary-lighter: #4a7ef0;
+  --ifm-color-primary-lightest: #7099f3;
+
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(37, 99, 235, 0.1);
+
+  --ifm-font-color-base: #1a1a1a;
+  --ifm-background-color: #ffffff;
+  --ifm-background-surface-color: #ffffff;
+
+  /* Custom tokens */
+  --cr-accent: #2563eb;
+  --cr-accent-hover: #1d4ed8;
+  --cr-accent-contrast: #ffffff;
+  --cr-emerald: #10b981;
+  --cr-mint: #e7f7f0;
+  --cr-clinical: #dbeafe;
+  --cr-ink: #1a1a1a;
+  --cr-ink-soft: #334155;
+  --cr-border: #e2e8f0;
+  --cr-surface-alt: #f1f5f9;
+  --cr-font-display: var(--ifm-font-family-base);
+  --cr-radius: 10px;
+  --cr-shadow-cta: 0 6px 16px rgba(37, 99, 235, 0.28);
+  --cr-shadow-cta-hover: 0 10px 24px rgba(37, 99, 235, 0.36);
+
+  /* Navbar */
+  --ifm-navbar-background-color: #ffffff;
+  --ifm-navbar-link-color: #1a1a1a;
+  --ifm-navbar-link-hover-color: var(--cr-accent);
+  --ifm-navbar-shadow: 0 1px 0 #e2e8f0;
+}
+
+/* ---------- DARK: neon-cyber (from HCHLyan.github.io) ---------- */
+[data-theme='dark'] {
+  /* Brand: neon cyan */
+  --ifm-color-primary: #00f7ff;
+  --ifm-color-primary-dark: #00dde6;
+  --ifm-color-primary-darker: #00d0d9;
+  --ifm-color-primary-darkest: #00acb3;
+  --ifm-color-primary-light: #2bf8ff;
+  --ifm-color-primary-lighter: #3df9ff;
+  --ifm-color-primary-lightest: #70fbff;
+
+  --docusaurus-highlighted-code-line-bg: rgba(0, 247, 255, 0.08);
+
+  --ifm-font-color-base: #e8eaf0;
+  --ifm-background-color: #05060a;
+  --ifm-background-surface-color: #0a0a0f;
+
+  /* Reference palette */
+  --cr-accent: #00f7ff; /* --color-primary   */
+  --cr-accent-hover: #5dfaff;
+  --cr-accent-contrast: #000000;
+  --cr-magenta: #ff00ff; /* --color-secondary */
+  --cr-purple: #bd00ff; /* --color-accent    */
+  --cr-green: #00e571; /* --color-success   */
+  --cr-ink: #ffffff;
+  --cr-ink-soft: #b4bccd;
+  --cr-border: rgba(255, 255, 255, 0.1);
+  --cr-glass: rgba(255, 255, 255, 0.05);
+  --cr-glass-strong: rgba(10, 10, 15, 0.72);
+  --cr-font-display: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+
+  /* Navbar */
+  --ifm-navbar-background-color: rgba(10, 10, 15, 0.72);
+  --ifm-navbar-link-color: #e8eaf0;
+  --ifm-navbar-link-hover-color: #00f7ff;
+  --ifm-navbar-shadow: 0 1px 0 rgba(0, 247, 255, 0.18);
+
+  --ifm-link-hover-color: #d36bff; /* readable tint of reference #bd00ff */
+}
+
+/* ==========================================================================
+   2. BASE
+   ========================================================================== */
+
+html {
+  scroll-behavior: smooth;
+}
+
+[data-theme='dark'] body {
+  background:
+    radial-gradient(900px 500px at 85% -10%, rgba(189, 0, 255, 0.1), transparent 60%),
+    radial-gradient(800px 500px at 0% 0%, rgba(0, 247, 255, 0.07), transparent 60%),
+    #05060a;
+  background-attachment: fixed;
+}
+
+[data-theme='dark'] h1,
+[data-theme='dark'] h2,
+[data-theme='dark'] h3 {
+  font-family: var(--cr-font-display);
+}
+
+/* ==========================================================================
+   3. NAVBAR
+   ========================================================================== */
+
+.navbar {
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.navbar__title {
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--cr-ink);
+}
+
+.navbar__link {
+  font-weight: 600;
+  position: relative;
+}
+
+/* Light: sharp dark text, clean underline for active/hover */
+[data-theme='light'] .navbar__link {
+  color: #1a1a1a;
+}
+[data-theme='light'] .navbar__link:hover,
+[data-theme='light'] .navbar__link--active {
+  color: var(--cr-accent);
+}
+[data-theme='light'] .navbar__link--active {
+  box-shadow: inset 0 -2px 0 var(--cr-accent);
+}
+
+/* Dark: glass bar with cyan hairline */
+[data-theme='dark'] .navbar {
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  backdrop-filter: blur(14px) saturate(140%);
+  font-family: var(--cr-font-display);
+}
+[data-theme='dark'] .navbar__link:hover,
+[data-theme='dark'] .navbar__link--active {
+  color: var(--cr-accent);
+  text-shadow: 0 0 8px rgba(0, 247, 255, 0.45);
+}
+[data-theme='dark'] .navbar__title {
+  color: var(--cr-accent);
+}
+
+/* ==========================================================================
+   4. DOCS POLISH
+   ========================================================================== */
+
+[data-theme='light'] .menu__link--active:not(.menu__link--sublist) {
+  background: var(--cr-clinical);
+  color: var(--cr-accent-hover);
+  font-weight: 600;
+}
+
+[data-theme='dark'] .menu__link--active:not(.menu__link--sublist) {
+  background: rgba(0, 247, 255, 0.08);
+  color: var(--cr-accent);
+  box-shadow: inset 2px 0 0 var(--cr-accent);
+}
+
+[data-theme='dark'] .theme-doc-markdown a:hover {
+  text-decoration: underline dotted #54c1e6;
+}
+
+/* ==========================================================================
+   5. FOOTER
+   ========================================================================== */
+
+/* ----- Light: soft grey, dark text ----- */
+[data-theme='light'] .footer--dark {
+  --ifm-footer-background-color: #f1f5f9;
+  --ifm-footer-color: #334155;
+  --ifm-footer-link-color: #1a1a1a;
+  --ifm-footer-link-hover-color: var(--cr-accent);
+  --ifm-footer-title-color: #0f172a;
+  border-top: 1px solid var(--cr-border);
+}
+
+/* ----- Dark: near-black with neon hairline ----- */
+[data-theme='dark'] .footer--dark {
+  --ifm-footer-background-color: #05060a;
+  --ifm-footer-color: #b4bccd;
+  --ifm-footer-link-color: #e8eaf0;
+  --ifm-footer-link-hover-color: #00f7ff;
+  --ifm-footer-title-color: #00f7ff;
+  position: relative;
+  border-top: 1px solid transparent;
+}
+[data-theme='dark'] .footer--dark::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #00f7ff, #bd00ff, transparent);
+  opacity: 0.7;
+}
+
+.footer__title {
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.footer__links .footer__col {
+  text-align: center;
+}
+
+/* Team column: spans the full width so members sit in one symmetrical row */
+.footer__col:has(.crTeam) {
+  flex: 0 0 100%;
+  max-width: 100%;
+  margin-top: 2.5rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--cr-border);
+}
+
+.footer__col:has(.crTeam) .footer__item {
+  display: block;
+}
+
+.crTeam {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2rem;
+  max-width: 900px;
+  margin: 1.25rem auto 0;
+}
+
+.crTeam__member {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 1.75rem 1rem;
+  border-radius: 14px;
+  color: inherit;
+  text-decoration: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease,
+    background-color 0.3s ease;
+}
+.crTeam__member:hover {
+  text-decoration: none;
+  transform: translateY(-4px);
+}
+
+.crTeam__avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--ifm-color-primary);
+}
+
+.crTeam__name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+/* Light cards */
+[data-theme='light'] .crTeam__member {
+  background: #ffffff;
+  border: 1px solid var(--cr-border);
+}
+[data-theme='light'] .crTeam__member:hover {
+  border-color: var(--cr-accent);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+}
+[data-theme='light'] .crTeam__avatar {
+  border-color: var(--cr-emerald);
+}
+
+/* Dark glass cards */
+[data-theme='dark'] .crTeam__member {
+  background: var(--cr-glass);
+  border: 1px solid var(--cr-border);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+[data-theme='dark'] .crTeam__member:hover {
+  border-color: #00fff9;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+}
+[data-theme='dark'] .crTeam__avatar {
+  border-color: #00f7ff;
+  box-shadow: 0 0 12px rgba(0, 247, 255, 0.35);
+}
+
+@media screen and (max-width: 768px) {
+  .crTeam {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .crTeam__member {
+    flex-direction: row;
+    justify-content: flex-start;
+    text-align: left;
+    padding: 1rem 1.25rem;
+  }
+  .crTeam__avatar {
+    width: 56px;
+    height: 56px;
+  }
+}
+
+/* ==========================================================================
+   6. ACCESSIBILITY
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .navbar,
+  .crTeam__member {
+    transition: none;
+  }
+  .crTeam__member:hover {
+    transform: none;
+  }
+}
