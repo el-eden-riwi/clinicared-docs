@@ -18,9 +18,15 @@ function HomepageHeader() {
         <p className="hero__subtitle">{siteConfig.tagline}</p>
         <div className={styles.buttons}>
           <Link
+<<<<<<< HEAD
             className={clsx('button button--lg', styles.ctaButton)}
             to="/docs/problema-original">
             Ver el Problema Original
+=======
+            className="button button--secondary button--lg"
+            to="/docs/problema-original">
+            Ver el Problema Original 🚀
+>>>>>>> 38ac9959b3452f8c96425bab5db223a4b2fca4fb
           </Link>
         </div>
       </div>
