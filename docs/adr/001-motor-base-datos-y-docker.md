@@ -1,12 +1,22 @@
-<<<<<<< HEAD
+---
+title: 001 - Motor de Base de Datos y Docker
+---
+
+# ADR 001: Uso de PostgreSQL Contener¡Aquí tienes otro **conflicto de fusión (merge conflict)**, pero esta vez dentro de un archivo Markdown (`.md`)! 
+
+En este caso, ambas ramas del conflicto son prácticamente idénticas, pero los marcadores dividieron la sección final. Para solucionarlo, simplemente unimos todo el texto de forma limpia, conservando todos los puntos y eliminando las marcas de Git (`<<<<<<< HEAD`, `=======`, `>>>>>>> ...`).
+
+Aquí tienes el archivo completo y limpio listo para copiar y pegar:
+
+```markdown
 ---
 title: 001 - Motor de Base de Datos y Docker
 ---
 
 # ADR 001: Uso de PostgreSQL Contenerizado en Docker para la Capa Transaccional
 
-* **Estado:** Aceptado
-* **Fecha:** 2026-10-15
+- **Estado:** Aceptado
+- **Fecha:** 2026-10-15
 
 ## Contexto
 El proyecto ClínicaRed requiere una base de datos relacional robusta que garantice integridad referencial entre sedes, profesionales, pacientes y citas médicas. Asimismo, el equipo de desarrollo trabaja en entornos híbridos (Windows / WSL2 Ubuntu), lo que genera fricción por conflictos de puertos locales, codificación de caracteres y diferencias en la instalación nativa del motor.
@@ -15,34 +25,10 @@ El proyecto ClínicaRed requiere una base de datos relacional robusta que garant
 Adoptar **PostgreSQL 15 (imagen `postgres:15-alpine`)** ejecutado mediante **Docker Compose**, automatizando el aprovisionamiento del esquema inicial a través del volumen `/docker-entrypoint-initdb.d/`.
 
 ## Consecuencias
-* **Positivas:**
+- **Positivas:**
   * Paridad total del entorno de desarrollo sin depender de instalaciones locales en el sistema operativo anfitrión.
   * Inicialización automática del esquema (`01_init_schema.sql`) al levantar el contenedor.
   * Cumplimiento estricto de propiedades ACID e integridad referencial (Foreign Keys y restricciones `NOT NULL`).
-* **Negativas / Riesgos:**
+- **Negativas / Riesgos:**
   * Requiere que Docker esté activo en el entorno de trabajo.
-=======
----
-title: 001 - Motor de Base de Datos y Docker
----
-
-# ADR 001: Uso de PostgreSQL Contenerizado en Docker para la Capa Transaccional
-
-* **Estado:** Aceptado
-* **Fecha:** 2026-10-15
-
-## Contexto
-El proyecto ClínicaRed requiere una base de datos relacional robusta que garantice integridad referencial entre sedes, profesionales, pacientes y citas médicas. Asimismo, el equipo de desarrollo trabaja en entornos híbridos (Windows / WSL2 Ubuntu), lo que genera fricción por conflictos de puertos locales, codificación de caracteres y diferencias en la instalación nativa del motor.
-
-## Decisión
-Adoptar **PostgreSQL 15 (imagen `postgres:15-alpine`)** ejecutado mediante **Docker Compose**, automatizando el aprovisionamiento del esquema inicial a través del volumen `/docker-entrypoint-initdb.d/`.
-
-## Consecuencias
-* **Positivas:**
-  * Paridad total del entorno de desarrollo sin depender de instalaciones locales en el sistema operativo anfitrión.
-  * Inicialización automática del esquema (`01_init_schema.sql`) al levantar el contenedor.
-  * Cumplimiento estricto de propiedades ACID e integridad referencial (Foreign Keys y restricciones `NOT NULL`).
-* **Negativas / Riesgos:**
-  * Requiere que Docker esté activo en el entorno de trabajo.
->>>>>>> 38ac9959b3452f8c96425bab5db223a4b2fca4fb
   * Necesidad de gestionar volúmenes persistentes (`pgdata`) para evitar pérdida de datos al reiniciar contenedores.
