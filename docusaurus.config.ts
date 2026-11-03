@@ -110,7 +110,6 @@ const config: Config = {
           title: "Equipo de Desarrollo",
           items: [
             {
-<<<<<<< HEAD
               // Inyectamos HTML; el estilo vive en src/css/custom.css (.crTeam)
               html: `
                 <div class="crTeam">
@@ -130,27 +129,6 @@ const config: Config = {
                   <a class="crTeam__member" href="https://github.com/IRoviraRomario" target="_blank">
                     <img class="crTeam__avatar" src="https://github.com/IRoviraRomario.png" alt="Romario" />
                     <strong class="crTeam__name">Kevin Romario Rovira Iglesias</strong>
-=======
-              // Inyectamos HTML para hacer las fotos circulares y alineadas
-              html: `
-                <div style="display: flex; flex-direction: column; gap: 12px;">
-                  <!-- Integrante 1: Jeas -->
-                  <a href="https://github.com/jhonnyelithAZ" target="_blank" style="display: flex; align-items: center; gap: 10px; color: inherit; text-decoration: none;">
-                    <img src="https://github.com/jhonnyelithAZ.png" style="width: 35px; height: 35px; border-radius: 50%; border: 2px solid var(--ifm-color-primary); object-fit: cover;" alt="Jeas" />
-                    <strong>Jhonatan Ayala S.(Jeas)</strong>
-                  </a>
-                  
-                  <!-- Integrante 2 -->
-                  <a href="https://github.com/HCHLyan" target="_blank" style="display: flex; align-items: center; gap: 10px; color: inherit; text-decoration: none;">
-                    <img src="https://github.com/HCHLyan.png" style="width: 35px; height: 35px; border-radius: 50%; border: 2px solid var(--ifm-color-primary); object-fit: cover;" alt="Compañero 2" />
-                    <strong>Lyan Páez 2</strong>
-                  </a>
-
-                  <!-- Integrante 3 -->
-                  <a href="https://github.com/IRoviraRomario" target="_blank" style="display: flex; align-items: center; gap: 10px; color: inherit; text-decoration: none;">
-                    <img src="https://github.com/IRoviraRomario.png" style="width: 35px; height: 35px; border-radius: 50%; border: 2px solid var(--ifm-color-primary); object-fit: cover;" alt="Compañero 3" />
-                    <strong>Kevin Rovira 3</strong>
->>>>>>> 38ac9959b3452f8c96425bab5db223a4b2fca4fb
                   </a>
                 </div>
               `,

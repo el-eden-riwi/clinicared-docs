@@ -3,7 +3,6 @@
  * and scoped locally.
  */
 
-<<<<<<< HEAD
 /* ---------- Hero: shared layout ---------- */
 .heroBanner {
   padding: 7rem 0 6rem;
@@ -26,22 +25,11 @@
   max-width: 640px;
   margin: 0 auto 2.5rem;
   line-height: 1.55;
-=======
-.heroBanner {
-  padding: 4rem 0;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
->>>>>>> 38ac9959b3452f8c96425bab5db223a4b2fca4fb
 }
 
 @media screen and (max-width: 996px) {
   .heroBanner {
-<<<<<<< HEAD
     padding: 4.5rem 1.5rem 4rem;
-=======
-    padding: 2rem;
->>>>>>> 38ac9959b3452f8c96425bab5db223a4b2fca4fb
   }
 }
 
@@ -50,7 +38,6 @@
   align-items: center;
   justify-content: center;
 }
-<<<<<<< HEAD
 
 /* ---------- Primary CTA: flat, rounded, no gradient ---------- */
 .buttons .ctaButton {
@@ -171,5 +158,3 @@
     transform: none;
   }
 }
-=======
->>>>>>> 38ac9959b3452f8c96425bab5db223a4b2fca4fb
