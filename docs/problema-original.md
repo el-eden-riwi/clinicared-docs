@@ -36,7 +36,7 @@ La información de citas está en el sistema de agendamiento de cada sede; la as
 
 Se requiere integrar estas fuentes con estricto cuidado de datos sensibles de salud, aplicar reglas clínicas y administrativas de agenda, orquestar recordatorios y producir indicadores de productividad por sede y especialidad.
 
-### 2.1 Dolores Actuales
+### 2.1 Obstáculos Actuales
 * **21% de inasistencias**; en algunas especialidades supera el 30%.
 * **Recordatorios enviados a todos por igual**, con costo alto y bajo efecto.
 * **Sobre-agenda manual** que a veces genera salas de espera colapsadas.
