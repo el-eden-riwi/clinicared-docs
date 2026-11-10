@@ -8,15 +8,15 @@ sidebar_label: Costos y Teardown (HU 06 - Task 6)
 
 ## 1. Contexto y Objetivos Operativos
 
-El despliegue del ecosistema **ClínicaRed** en Amazon Web Services (AWS) implementa un modelo desacoplado y serverless basado en contenedores dentro de la región **US East (Ohio / `us-east-2`)**[cite: 5, 6]. 
+El despliegue del ecosistema **ClínicaRed** en Amazon Web Services (AWS) implementa un modelo desacoplado y serverless basado en contenedores dentro de la región **US East (Ohio / `us-east-2`)**.
 
-El objetivo de este documento es formalizar el presupuesto mensual extraído de la **AWS Pricing Calculator** para los servicios en producción[cite: 5, 6], establecer las estrategias de ahorro en horarios no productivos y definir el protocolo estándar de desmantelamiento (*teardown*) mediante AWS CLI para prevenir la facturación por recursos ociosos.
+El objetivo de este documento es formalizar el presupuesto mensual extraído de la **AWS Pricing Calculator** para los servicios en producción, establecer las estrategias de ahorro en horarios no productivos y definir el protocolo estándar de desmantelamiento (*teardown*) mediante AWS CLI para prevenir la facturación por recursos ociosos.
 
 ---
 
 ## 2. Presupuesto Mensual Oficial (AWS Pricing Calculator)
 
-El dimensionamiento de la infraestructura cubre las necesidades transaccionales del backend FastAPI y la persistencia de datos[cite: 6]:
+El dimensionamiento de la infraestructura cubre las necesidades transaccionales del backend FastAPI y la persistencia de datos:
 
 | Servicio AWS | Tipo de Recurso / Configuración Técnica | Costo Mensual |
 | :--- | :--- | :---: |
@@ -33,7 +33,7 @@ El dimensionamiento de la infraestructura cubre las necesidades transaccionales 
 Para entornos de prueba, validaciones académicas y auditorías que no requieran disponibilidad continua (730 horas/mes), se aplica la política de detención programada fuera de turno (estimado sobre 240 horas/mes):
 
 * **AWS Fargate (240 hrs/mes):** ~$5,92 USD.
-* **Amazon RDS PostgreSQL (Detenido fuera de turno):** ~$6,50 USD (únicamente cobro por retención del volumen de 20 GB gp2)[cite: 6].
+* **Amazon RDS PostgreSQL (Detenido fuera de turno):** ~$6,50 USD (únicamente cobro por retención del volumen de 20 GB gp2).
 * **Application Load Balancer (Pausado o eliminado entre sesiones):** ~$5,47 USD.
 * **Presupuesto Mensual Reducido:** **~$17,89 USD / mes** (reducción del **64.3%** respecto a la ejecución continua).
 
