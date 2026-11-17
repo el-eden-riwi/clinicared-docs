@@ -1,50 +1,50 @@
 ---
 id: costos-y-teardown-aws
-title: Gestión de Costos y Protocolo de Teardown en AWS
-sidebar_label: Costos y Teardown (HU 06 - Task 6)
+title: AWS Cost Management and Teardown Protocol
+sidebar_label: Costs & Teardown (US 06 - Task 6)
 ---
 
-# Gestión de Costos y Protocolo de Teardown en AWS (US 06 - Task 6)
+# AWS Cost Management and Teardown Protocol (US 06 - Task 6)
 
-## 1. Contexto y Objetivos Operativos
+## 1. Context and Operational Objectives
 
-El despliegue del ecosistema **ClínicaRed** en Amazon Web Services (AWS) implementa un modelo desacoplado y serverless basado en contenedores dentro de la región **US East (Ohio / `us-east-2`)**.
+The deployment of the **ClínicaRed** ecosystem on Amazon Web Services (AWS) implements a decoupled, serverless container model within the **US East (Ohio / `us-east-2`)** region.
 
-El objetivo de este documento es formalizar el presupuesto mensual extraído de la **AWS Pricing Calculator** para los servicios en producción, establecer las estrategias de ahorro en horarios no productivos y definir el protocolo estándar de desmantelamiento (*teardown*) mediante AWS CLI para prevenir la facturación por recursos ociosos.
+This document formalizes the monthly budget derived from the **AWS Pricing Calculator** for production services, establishes off-hours cost-saving strategies, and defines the standard teardown protocol via AWS CLI to prevent charges from idle resources.
 
 ---
 
-## 2. Presupuesto Mensual Oficial (AWS Pricing Calculator)
+## 2. Official Monthly Budget (AWS Pricing Calculator)
 
-El dimensionamiento de la infraestructura cubre las necesidades transaccionales del backend FastAPI y la persistencia de datos:
+Infrastructure sizing covers the transactional requirements of the FastAPI backend and data persistence:
 
-| Servicio AWS | Tipo de Recurso / Configuración Técnica | Costo Mensual |
+| AWS Service | Resource Type / Technical Configuration | Monthly Cost |
 | :--- | :--- | :---: |
-| **AWS Fargate** | 1 Tarea continua (Linux x86, 1 GB RAM, 20 GB almacenamiento efímero, 730 hrs/mes) | **$18,02 USD** |
-| **Application Load Balancer** | 1 ALB dedicado para terminación SSL, enrutamiento y health checks | **$16,66 USD** |
-| **Amazon RDS for PostgreSQL** | Instancia `db.t3.micro`, 20 GB almacenamiento SSD gp2, Single-AZ (730 hrs/mes) | **$15,44 USD** |
-| **Costo Inicial (Upfront)** | Modelo bajo demanda (On-Demand) sin compromiso temporal | **$0,00 USD** |
-| **TOTAL MENSUAL ESTIMADO** | **Arquitectura Completa ClínicaRed (24/7)** | **$50,12 USD / mes** |
+| **AWS Fargate** | 1 Continuous Task (Linux x86, 1 GB RAM, 20 GB ephemeral storage, 730 hrs/month) | **$18.02 USD** |
+| **Application Load Balancer** | 1 Dedicated ALB for SSL termination, routing, and health checks | **$16.66 USD** |
+| **Amazon RDS for PostgreSQL** | `db.t3.micro` instance, 20 GB gp2 SSD storage, Single-AZ (730 hrs/month) | **$15.44 USD** |
+| **Upfront Cost** | On-Demand model with no long-term commitment | **$0.00 USD** |
+| **ESTIMATED MONTHLY TOTAL** | **Full ClínicaRed Architecture (24/7)** | **$50.12 USD / month** |
 
 ---
 
-## 3. Estrategia FinOps: Modo Desarrollo / Horario Hábil
+## 3. FinOps Strategy: Development / Business Hours Mode
 
-Para entornos de prueba, validaciones académicas y auditorías que no requieran disponibilidad continua (730 horas/mes), se aplica la política de detención programada fuera de turno (estimado sobre 240 horas/mes):
+For testing environments, academic validations, and audits that do not require continuous availability (730 hours/month), an off-hours scheduled shutdown policy is applied (estimated at 240 hours/month):
 
-* **AWS Fargate (240 hrs/mes):** ~$5,92 USD.
-* **Amazon RDS PostgreSQL (Detenido fuera de turno):** ~$6,50 USD (únicamente cobro por retención del volumen de 20 GB gp2).
-* **Application Load Balancer (Pausado o eliminado entre sesiones):** ~$5,47 USD.
-* **Presupuesto Mensual Reducido:** **~$17,89 USD / mes** (reducción del **64.3%** respecto a la ejecución continua).
+- **AWS Fargate (240 hrs/month):** ~$5.92 USD.
+- **Amazon RDS PostgreSQL (Stopped off-hours):** ~$6.50 USD (billed solely for 20 GB gp2 storage retention).
+- **Application Load Balancer (Paused or deleted between sessions):** ~$5.47 USD.
+- **Reduced Monthly Budget:** **~$17.89 USD / month** (**64.3%** reduction compared to continuous execution).
 
 ---
 
-## 4. Protocolo de Teardown con AWS CLI
+## 4. Teardown Protocol with AWS CLI
 
-Al finalizar cada jornada de prueba o ciclo de evaluación, debe ejecutarse el siguiente protocolo en estricto orden secuencial con credenciales configuradas en la región `us-east-2`:
+At the end of each test session or evaluation cycle, execute the following protocol in strict sequential order with credentials configured for `us-east-2`:
 
-### Paso 1: Escalar las Tareas de Fargate a Cero
-Cancela de inmediato la facturación por consumo de CPU y memoria serverless:
+### Step 1: Scale Fargate Tasks to Zero
+Immediately stops serverless CPU and memory billing:
 ```bash
 aws ecs update-service \
     --cluster clinicared-cluster \
@@ -53,8 +53,8 @@ aws ecs update-service \
     --region us-east-2
 ```
 
-### Paso 2: Eliminar el Application Load Balancer
-El balanceador genera un cobro horario fijo ($0,0225/hora) aun sin recibir solicitudes. Debe liberarse al terminar las pruebas prolongadas:
+### Step 2: Delete the Application Load Balancer
+The load balancer incurs a fixed hourly charge ($0.0225/hour) even with zero traffic. Release it after extended test sessions:
 ```bash
 ALB_ARN=$(aws elbv2 describe-load-balancers \
     --names clinicared-alb \
@@ -64,18 +64,18 @@ ALB_ARN=$(aws elbv2 describe-load-balancers \
 
 if [ "$ALB_ARN" != "None" ] && [ -n "$ALB_ARN" ]; then
     aws elbv2 delete-load-balancer --load-balancer-arn "$ALB_ARN" --region us-east-2
-    echo "Application Load Balancer clinicared-alb eliminado correctamente."
+    echo "Application Load Balancer clinicared-alb successfully deleted."
 fi
 ```
 
-### Paso 3: Pausar o Eliminar la Base de Datos RDS
-* **Pausar temporalmente (hasta 7 días de detención continua):**
+### Step 3: Stop or Delete the RDS Database
+- **Temporarily stop (up to 7 consecutive days):**
   ```bash
   aws rds stop-db-instance \
       --db-instance-identifier clinicared-db \
       --region us-east-2
   ```
-* **Eliminar definitivamente preservando un snapshot de seguridad:**
+- **Permanently delete while preserving a final safety snapshot:**
   ```bash
   aws rds delete-db-instance \
       --db-instance-identifier clinicared-db \
@@ -83,8 +83,8 @@ fi
       --region us-east-2
   ```
 
-### Paso 4: Purgar Imágenes Obsoletas en Amazon ECR
-Elimina imágenes intermedias o sin tag para evitar cobros residuales por cuota de disco en el registro:
+### Step 4: Purge Obsolete Images in Amazon ECR
+Removes intermediate or untagged images to avoid residual registry storage charges:
 ```bash
 aws ecr batch-delete-image \
     --repository-name clinicared-backend \
@@ -92,8 +92,8 @@ aws ecr batch-delete-image \
     --region us-east-2
 ```
 
-### Paso 5: Limpieza de Logs en CloudWatch
-Remueve el grupo de logs generado durante las pruebas para liberar espacio:
+### Step 5: Clean Up CloudWatch Logs
+Removes the log group generated during testing to free storage:
 ```bash
 aws logs delete-log-group \
     --log-group-name /ecs/clinicared-backend \
@@ -102,12 +102,12 @@ aws logs delete-log-group \
 
 ---
 
-## 5. Lista de Chequeo de Auditoría de Cierre
+## 5. Closing Audit Checklist
 
-Antes de finalizar la sesión de trabajo, valida en consola o mediante CLI:
+Before ending the work session, verify via the AWS Console or CLI:
 
-- [ ] Tareas Fargate en estado `STOPPED` (Count = 0).
-- [ ] Application Load Balancer (`clinicared-alb`) eliminado de la VPC.
-- [ ] Instancia RDS en estado `stopped` o eliminada con snapshot guardado.
-- [ ] Ninguna IP elástica sin asociar en la cuenta.
-- [ ] Tablero de **AWS Cost Explorer** validado sin consumos imprevistos activos.
+- [ ] Fargate tasks in `STOPPED` state (Count = 0).
+- [ ] Application Load Balancer (`clinicared-alb`) removed from the VPC.
+- [ ] RDS instance in `stopped` state or deleted with a saved snapshot.
+- [ ] No unassociated Elastic IPs remaining in the account.
+- [ ] **AWS Cost Explorer** dashboard verified with no unexpected active spend.
