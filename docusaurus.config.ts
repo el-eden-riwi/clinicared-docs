@@ -33,12 +33,19 @@ const config: Config = {
 
   onBrokenLinks: "throw",
 
-  // Even if you don't use internationalization, you can use this field to set
-  // useful metadata like html lang. For example, if your site is Chinese, you
-  // may want to replace "en" with "zh-Hans".
   i18n: {
-    defaultLocale: "en",
-    locales: ["en"],
+    defaultLocale: "es",
+    locales: ["es", "en"],
+    localeConfigs: {
+      es: {
+        label: "Español",
+        htmlLang: "es-CO",
+      },
+      en: {
+        label: "English",
+        htmlLang: "en-US",
+      },
+    },
   },
 
   presets: [
@@ -47,8 +54,6 @@ const config: Config = {
       {
         docs: {
           sidebarPath: "./sidebars.ts",
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
           editUrl: "https://github.com/el-eden-riwi/clinicared-docs/tree/main/",
         },
         blog: false,
@@ -86,6 +91,10 @@ const config: Config = {
         {
           href: "https://github.com/el-eden-riwi",
           label: "GitHub",
+          position: "right",
+        },
+        {
+          type: "localeDropdown",
           position: "right",
         },
       ],

@@ -1,0 +1,26 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.tutorialSidebar.category.adr": {
+    "message": "ADRs",
+    "description": "The label for category 'adr' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.analitica": {
+    "message": "Analytics",
+    "description": "The label for category 'analitica' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.architecture": {
+    "message": "Architecture",
+    "description": "The label for category 'architecture' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.operaciones": {
+    "message": "Operations",
+    "description": "The label for category 'operaciones' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.power BI": {
+    "message": "Power BI",
+    "description": "The label for category 'power BI' in sidebar 'tutorialSidebar'"
+  }
+}

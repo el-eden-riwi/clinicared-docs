@@ -4,6 +4,7 @@ import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
+import Translate, {translate} from '@docusaurus/Translate';
 
 import styles from './index.module.css';
 
@@ -15,12 +16,18 @@ function HomepageHeader() {
         <Heading as="h1" className="hero__title">
           {siteConfig.title}
         </Heading>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
+        <p className="hero__subtitle">
+          <Translate id="homepage.tagline">
+            Documentación Técnica y Arquitectura de ClínicaRed
+          </Translate>
+        </p>
         <div className={styles.buttons}>
           <Link
             className={clsx('button button--lg', styles.ctaButton)}
             to="/docs/problema-original">
-            Ver el Problema Original
+            <Translate id="homepage.cta">
+              Ver el Problema Original
+            </Translate>
           </Link>
         </div>
       </div>
@@ -32,8 +39,11 @@ export default function Home(): ReactNode {
   const {siteConfig} = useDocusaurusContext();
   return (
     <Layout
-      title={`Inicio - ${siteConfig.title}`}
-      description="Documentación Técnica y Arquitectura de ClínicaRed">
+      title={`${translate({id: 'homepage.title', message: 'Inicio'})} - ${siteConfig.title}`}
+      description={translate({
+        id: 'homepage.description',
+        message: 'Documentación Técnica y Arquitectura de ClínicaRed',
+      })}>
       <HomepageHeader />
       <main>
         {/* Espacio reservado para Power BI */}

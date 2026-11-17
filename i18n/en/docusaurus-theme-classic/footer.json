@@ -1,0 +1,22 @@
+{
+  "link.title.Documentación": {
+    "message": "Documentation",
+    "description": "The title of the footer links column with title=Documentación in the footer"
+  },
+  "link.title.Equipo de Desarrollo": {
+    "message": "Development Team",
+    "description": "The title of the footer links column with title=Equipo de Desarrollo in the footer"
+  },
+  "link.item.label.Arquitectura": {
+    "message": "Architecture",
+    "description": "The label of footer link with label=Arquitectura linking to /docs/architecture/architecture_v1"
+  },
+  "link.item.label.Repositorio GitHub": {
+    "message": "GitHub Repository",
+    "description": "The label of footer link with label=Repositorio GitHub linking to https://github.com/el-eden-riwi/clinicared-docs"
+  },
+  "copyright": {
+    "message": "Copyright © 2026 ClínicaRed. Built at Riwi.",
+    "description": "The footer copyright"
+  }
+}
